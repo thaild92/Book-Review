@@ -19,9 +19,11 @@
             </div>
         </div>
     </div>
-    {{-- @php
-        echo \App\Models\Book::count();
-    @endphp --}}
+
+    <div class="mb-4">
+        <a href="{{ route('books.reviews.create', $book) }}" class="reset-link">Add a Review</a>
+    </div>
+
     <div>
         <h2 class="mb-4 text-xl font-semibold">Reviews</h2>
         <ul>
