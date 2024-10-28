@@ -31,8 +31,9 @@ class BookController extends Controller
             default => $books->withReviewsCount()->withAvgRated()->latest(),
         };
 
-        // $books = $books->get();
 
+        // Generate a unique cache key based on the filter and title, then cache the book query results.
+        // The cache expires in 5 second, after which it refreshes with the latest data.
         $cacheKey = 'books:' . $filter . ':' . $title;
         $books =  Cache::remember($cacheKey, 5, function () use ($books, $filter) {
             return  $books->get();
@@ -75,15 +76,6 @@ class BookController extends Controller
         );
     }
 
-
-
-    // public function show(Book $book)
-    // {
-    //     return view(
-    //         'books.show',
-    //         ['book' => $book]
-    //     );
-    // }
 
     /**
      * Show the form for editing the specified resource.
