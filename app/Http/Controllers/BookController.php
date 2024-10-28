@@ -31,12 +31,12 @@ class BookController extends Controller
             default => $books->withReviewsCount()->withAvgRated()->latest(),
         };
 
-        $books = $books->get();
+        // $books = $books->get();
 
-        // $cacheKey = 'books:' . $filter . ':' . $title;
-        // $books =  Cache::remember($cacheKey, 5, function () use ($books, $filter) {
-        //     return  $books->get();
-        // });
+        $cacheKey = 'books:' . $filter . ':' . $title;
+        $books =  Cache::remember($cacheKey, 5, function () use ($books, $filter) {
+            return  $books->get();
+        });
 
         return view('books.index', ['books' => $books]);
     }
@@ -62,15 +62,6 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-
-        // $book2 = Book::with([
-        //     'reviews'
-        // ])->where('id', $book->id)->get();
-
-        // dd(
-        //     Book::with(['reviews' => fn($query) => $query->latest()])
-        //         ->find($id)->toArray()
-        // );
 
         $cacheKey = "book:" . $book->id;
         // $book =   $book->with(['reviews' => fn($query) => $query->latest()])->withReviewsCount()->withAvgRated()->findOrFail($book->id);

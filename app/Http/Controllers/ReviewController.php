@@ -42,12 +42,7 @@ class ReviewController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Book $book, Review $review)
-    {
-        // dd($review->toArray());
-        dd($review);
-        return 'OK';
-    }
+    public function show(Book $book, Review $review) {}
 
     /**
      * Show the form for editing the specified resource.
